@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leadership - Chosen Tribe Worship Station</title>
+    <meta name="description" content="Meet Evangelist Prakash and read personal testimonies from the leadership of Chosen Tribe Worship Station.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Outfit:wght@400;700;800&display=swap" rel="stylesheet">
+    <!-- Icons (Phosphor Icons) -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Specific header styling for subpages */
+        .subpage-hero {
+            padding: 8rem 0 4rem;
+            background: linear-gradient(to bottom, rgba(5, 10, 21, 0.95), rgba(5, 10, 21, 0.98));
+            border-bottom: 1px solid var(--glass-border);
+            text-align: center;
+        }
+
+        .subpage-title {
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            margin-bottom: 0.5rem;
+        }
+
+        .subpage-subtitle {
+            color: var(--color-text-muted);
+            font-size: 1.1rem;
+            font-weight: 300;
+        }
+
+        .leadership-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .leadership-detail-card {
+            display: grid;
+            grid-template-columns: 350px 1fr;
+            gap: 3rem;
+            padding: 4rem;
+            margin-bottom: 5rem;
+        }
+
+        @media (max-width: 992px) {
+            .leadership-detail-card {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                padding: 2.5rem;
+            }
+            .leader-detail-img-wrapper {
+                max-width: 300px;
+                margin: 0 auto;
+            }
+        }
+
+        .leader-detail-img-wrapper {
+            width: 100%;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 2px solid var(--color-gold);
+            box-shadow: 0 0 25px var(--color-gold-glow);
+        }
+
+        .leader-detail-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .leader-detail-info h3 {
+            font-size: 2.5rem;
+            color: var(--color-gold-light);
+            margin-bottom: 0.5rem;
+        }
+
+        .leader-detail-role {
+            font-size: 1rem;
+            color: var(--color-gold);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 700;
+            margin-bottom: 2rem;
+        }
+
+        .leader-detail-bio p {
+            color: var(--color-text-muted);
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .leader-detail-bio blockquote {
+            border-left: 4px solid var(--color-gold);
+            padding-left: 1.5rem;
+            margin: 2rem 0;
+            font-style: italic;
+            color: white;
+            font-size: 1.2rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav id="navbar" class="glass-nav scrolled">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <img src="assets/logo.jpg" alt="Chosen Tribe Logo" class="logo-img">
+                <span class="logo-text">Chosen Tribe</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html#about">About</a>
+                <a href="leadership.html" class="active">Leadership</a>
+                <a href="index.html#ministries">Ministries</a>
+                <a href="index.html#media">Media</a>
+                <a href="index.html#contact" class="btn-primary-outline">Contact Us</a>
+            </div>
+            <div class="mobile-menu-btn">
+                <i class="ph ph-list"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu">
+        <div class="close-btn"><i class="ph ph-x"></i></div>
+        <div class="mobile-nav-links">
+            <a href="index.html#about">About</a>
+            <a href="leadership.html">Leadership</a>
+            <a href="index.html#ministries">Ministries</a>
+            <a href="index.html#media">Media</a>
+            <a href="index.html#contact">Contact Us</a>
+        </div>
+    </div>
+
+    <!-- Subpage Hero -->
+    <header class="subpage-hero">
+        <div class="container">
+            <h1 class="subpage-title">Our <span class="text-gold">Leadership</span></h1>
+            <p class="subpage-subtitle">The visionary leadership serving the Chosen Tribe Worship Station</p>
+        </div>
+    </header>
+
+    <!-- Leadership Details Section -->
+    <section class="section-padding">
+        <div class="container">
+            <div class="leadership-container">
+                <div class="leadership-detail-card glass-panel fade-in-up">
+                    <div class="leader-detail-img-wrapper">
+                        <img src="assets/evangelist_portrait_1782125736509.png" alt="Evangelist Prakash">
+                    </div>
+                    <div class="leader-detail-info">
+                        <h3>Evangelist Prakash</h3>
+                        <p class="leader-detail-role">Lead Pastor & Visionary</p>
+                        <div class="leader-detail-bio">
+                            <p>Evangelist Prakash is a dedicated man of God with a burning passion to see the current generation revived, discipled, and launched into their spiritual callings.</p>
+                            <p>Through the core ministry at the Worship Station, he leads deep discipleship programs, uncompromising teaching of the Word, and intense worship spaces.</p>
+                            <blockquote>
+                                "Called to raise disciples, not just believers. We go wherever He sends us, even to the most unreachable places."
+                            </blockquote>
+                            <p>He also oversees the Grace Media & Ministry Andaman branch, utilizing modern content creation and visual production to spread the Gospel across boundaries.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Leader's Heart & Testimony -->
+    <section class="testimony-section section-padding" style="border-top: 1px solid var(--glass-border);">
+        <div class="container">
+            <div class="section-header text-center fade-in-up" style="margin-bottom: 3.5rem;">
+                <h2 class="section-title">The Heart of <span class="text-gold">Our Leader</span></h2>
+                <p>Personal reflections and testimony from Evangelist Prakash on devotion, sacrifice, and the call to serve.</p>
+            </div>
+            
+            <div class="testimony-grid">
+                <div class="testimony-card glow-border fade-in-up">
+                    <img src="assets/leader_heart_2.jpg" alt="My Dear Jesus - Reflection">
+                </div>
+                <div class="testimony-card glow-border fade-in-up" style="animation-delay: 0.1s;">
+                    <img src="assets/leader_heart_1.jpg" alt="Sacrificial Love - Reflection">
+                </div>
+                <div class="testimony-card glow-border fade-in-up" style="animation-delay: 0.2s;">
+                    <img src="assets/leader_heart_3.jpg" alt="Decision to Serve - Reflection">
+                </div>
+                <div class="testimony-card glow-border fade-in-up" style="animation-delay: 0.3s;">
+                    <img src="assets/leader_heart_4.jpg" alt="A Powerful Love - Reflection">
+                </div>
+                <div class="testimony-card glow-border fade-in-up" style="animation-delay: 0.4s;">
+                    <img src="assets/leader_heart_5.jpg" alt="Growing in Faith - Reflection">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container text-center">
+            <h2 class="footer-logo">CHOSEN TRIBE</h2>
+            <p class="footer-tagline">"Raising Disciples for the Kingdom"</p>
+            <p class="footer-scripture">1 Peter 2:9</p>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Chosen Tribe Worship Station. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

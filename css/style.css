@@ -206,12 +206,17 @@ img {
 }
 
 .logo-img {
-    height: 45px;
+    height: 60px;
     width: auto;
     border-radius: 50%;
-    border: 1px solid var(--color-gold);
-    box-shadow: 0 0 10px var(--color-gold-glow);
+    border: 1.5px solid var(--color-gold);
+    box-shadow: 0 0 15px var(--color-gold-glow);
     object-fit: cover;
+    transition: height 0.4s ease;
+}
+
+.glass-nav.scrolled .logo-img {
+    height: 50px;
 }
 
 .logo-text {
@@ -347,22 +352,77 @@ img {
     padding-top: 5rem;
 }
 
-.hero-title {
-    font-size: clamp(2.5rem, 6vw, 4.5rem);
+.hero-welcome {
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    letter-spacing: 4px;
+    color: var(--color-gold);
     margin-bottom: 1rem;
-    text-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    font-weight: 600;
+    text-shadow: 0 0 10px var(--color-gold-glow);
 }
 
-.hero-title span {
+.hero-title {
+    margin-bottom: 1.5rem;
+    text-shadow: 0 4px 20px rgba(0,0,0,0.6);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.title-ct {
+    font-size: clamp(3.5rem, 9vw, 6rem);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    background: linear-gradient(135deg, #e53e3e 20%, #3182ce 80%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 2px 10px rgba(0,0,0,0.5));
+}
+
+.title-ws {
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    color: var(--color-gold-light);
+    font-weight: 400;
+    letter-spacing: 2px;
+    position: relative;
+    padding-bottom: 0.75rem;
+}
+
+.title-ws::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 15%;
+    width: 70%;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--color-gold), transparent);
+}
+
+.header-arrow {
+    margin: 1.5rem 0 2rem;
+    font-size: 2.2rem;
     color: var(--color-gold);
-    text-shadow: 0 0 15px var(--color-gold-glow);
+}
+
+.arrow-bounce {
+    display: inline-block;
+    animation: arrowBounce 2s infinite ease-in-out;
+}
+
+@keyframes arrowBounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(10px); }
 }
 
 .hero-subtitle {
-    font-size: clamp(1.1rem, 2vw, 1.5rem);
-    color: var(--color-text-muted);
-    margin-bottom: 2.5rem;
+    font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+    color: white;
+    margin-bottom: 3rem;
     font-weight: 300;
+    font-style: italic;
     letter-spacing: 1px;
 }
 
