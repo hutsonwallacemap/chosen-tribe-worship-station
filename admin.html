@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chosen Tribe - Leader Dashboard</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Outfit:wght@400;700;800&display=swap" rel="stylesheet">
+    <!-- Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Special admin-specific styles override/addition */
+        body {
+            background-color: #050a15;
+            min-height: 100vh;
+        }
+        
+        .admin-page {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 2rem 1rem;
+        }
+
+        .admin-login-card {
+            width: 100%;
+            max-width: 450px;
+            padding: 3rem;
+        }
+
+        .dashboard-container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: none;
+        }
+
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .dashboard-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .stat-card {
+            padding: 1.5rem;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .stat-icon {
+            font-size: 2.5rem;
+            color: var(--color-gold);
+            opacity: 0.8;
+        }
+
+        .stat-info h4 {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--color-text-muted);
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-info .stat-number {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        .controls-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .search-bar {
+            position: relative;
+            max-width: 350px;
+            width: 100%;
+        }
+
+        .search-bar i {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--color-text-muted);
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 0.75rem 1rem 0.75rem 2.5rem;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid var(--glass-border);
+            border-radius: 30px;
+            color: white;
+            font-family: var(--font-body);
+        }
+
+        .search-bar input:focus {
+            outline: none;
+            border-color: var(--color-gold);
+            box-shadow: 0 0 10px var(--color-gold-glow);
+        }
+
+        .table-wrapper {
+            width: 100%;
+            overflow-x: auto;
+            border-radius: 12px;
+            border: 1px solid var(--glass-border);
+        }
+
+        .members-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        .members-table th {
+            background: rgba(255,255,255,0.03);
+            color: var(--color-gold-light);
+            font-family: var(--font-heading);
+            font-weight: 600;
+            padding: 1.2rem 1.5rem;
+            border-bottom: 1px solid var(--glass-border);
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+        }
+
+        .members-table td {
+            padding: 1.2rem 1.5rem;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            color: var(--color-text-main);
+            font-size: 0.95rem;
+        }
+
+        .members-table tr:hover td {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .table-empty {
+            padding: 3rem;
+            text-align: center;
+            color: var(--color-text-muted);
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="admin-page container">
+        
+        <!-- Login Card -->
+        <div id="login-section" class="admin-login-card glass-panel fade-in-up">
+            <div class="text-center" style="margin-bottom: 2rem;">
+                <img src="assets/logo.jpg" alt="Logo" style="width: 80px; height: 80px; border-radius: 50%; border: 2px solid var(--color-gold); margin-bottom: 1rem; object-fit: cover;">
+                <h2>Leader Login</h2>
+                <p style="color: var(--color-text-muted); font-size: 0.9rem;">Access Chosen Tribe Registrations</p>
+            </div>
+            
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="password">Admin Password</label>
+                    <input type="password" id="password" placeholder="Enter dashboard password" required>
+                    <span id="login-error" style="color: #ff4a4a; font-size: 0.85rem; margin-top: 0.5rem; display: none;">Incorrect password. Please try again.</span>
+                </div>
+                <button type="submit" class="btn-primary w-100 glow-effect" style="margin-top: 1rem;">Unlock Dashboard</button>
+            </form>
+        </div>
+
+        <!-- Dashboard Section -->
+        <div id="dashboard-section" class="dashboard-container fade-in-up">
+            <div class="dashboard-header">
+                <div>
+                    <h1 class="text-gold">Leader Dashboard</h1>
+                    <p style="color: var(--color-text-muted);">Manage member registrations and interests</p>
+                </div>
+                <div style="display: flex; gap: 1rem;">
+                    <a href="index.html" class="btn-secondary" style="display: inline-flex; align-items: center; gap: 0.5rem;"><i class="ph ph-house"></i> Back to Site</a>
+                    <button id="logout-btn" class="btn-primary-outline" style="display: inline-flex; align-items: center; gap: 0.5rem;"><i class="ph ph-sign-out"></i> Logout</button>
+                </div>
+            </div>
+
+            <!-- Stats Counters -->
+            <div class="dashboard-stats">
+                <div class="stat-card glass-panel">
+                    <i class="ph ph-users stat-icon"></i>
+                    <div class="stat-info">
+                        <h4>Total Registered</h4>
+                        <div id="stat-total" class="stat-number">0</div>
+                    </div>
+                </div>
+                <div class="stat-card glass-panel">
+                    <i class="ph ph-music-notes stat-icon"></i>
+                    <div class="stat-info">
+                        <h4>Worship Station</h4>
+                        <div id="stat-worship" class="stat-number">0</div>
+                    </div>
+                </div>
+                <div class="stat-card glass-panel">
+                    <i class="ph ph-video-camera stat-icon"></i>
+                    <div class="stat-info">
+                        <h4>Grace Media</h4>
+                        <div id="stat-media" class="stat-number">0</div>
+                    </div>
+                </div>
+                <div class="stat-card glass-panel">
+                    <i class="ph ph-sparkles stat-icon"></i>
+                    <div class="stat-info">
+                        <h4>Others</h4>
+                        <div id="stat-others" class="stat-number">0</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Controls row -->
+            <div class="controls-row">
+                <div class="search-bar">
+                    <i class="ph ph-magnifying-glass"></i>
+                    <input type="text" id="search-input" placeholder="Search members by name or interest...">
+                </div>
+                <button id="export-btn" class="btn-primary glow-effect" style="display: inline-flex; align-items: center; gap: 0.5rem;"><i class="ph ph-download-simple"></i> Export to Excel (CSV)</button>
+            </div>
+
+            <!-- Members Data Table -->
+            <div class="table-wrapper glass-panel">
+                <table class="members-table">
+                    <thead>
+                        <tr>
+                            <th>Registration Date</th>
+                            <th>Full Name</th>
+                            <th>Phone Number</th>
+                            <th>Area of Interest</th>
+                            <th>Address</th>
+                        </tr>
+                    </thead>
+                    <tbody id="members-table-body">
+                        <!-- Filled by JS -->
+                    </tbody>
+                </table>
+                <div id="empty-state" class="table-empty" style="display: none;">
+                    No members found matching your search.
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Configuration for Supabase (if you set up your database, paste keys here) -->
+    <script>
+        // Paste your Supabase project credentials here to go online:
+        window.SUPABASE_URL = "";
+        window.SUPABASE_ANON_KEY = "";
+        
+        // Dashboard Password (Change this to whatever you'd like!)
+        const ADMIN_PASSWORD = "ChosenTribe2026";
+    </script>
+
+    <!-- Supabase SDK, DB Helper, and Admin Login Script -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/database.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const loginSection = document.getElementById('login-section');
+            const dashboardSection = document.getElementById('dashboard-section');
+            const loginForm = document.getElementById('login-form');
+            const passwordInput = document.getElementById('password');
+            const loginError = document.getElementById('login-error');
+            const logoutBtn = document.getElementById('logout-btn');
+            const searchInput = document.getElementById('search-input');
+            const exportBtn = document.getElementById('export-btn');
+            
+            const tableBody = document.getElementById('members-table-body');
+            const emptyState = document.getElementById('empty-state');
+            
+            const statTotal = document.getElementById('stat-total');
+            const statWorship = document.getElementById('stat-worship');
+            const statMedia = document.getElementById('stat-media');
+            const statOthers = document.getElementById('stat-others');
+
+            let allRegistrations = [];
+
+            // Check if already authenticated (simple sessionStorage check)
+            if (sessionStorage.getItem('ct_admin_auth') === 'true') {
+                showDashboard();
+            }
+
+            // Login Submit
+            loginForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                if (passwordInput.value === ADMIN_PASSWORD) {
+                    sessionStorage.setItem('ct_admin_auth', 'true');
+                    loginError.style.display = 'none';
+                    passwordInput.value = '';
+                    showDashboard();
+                } else {
+                    loginError.style.display = 'block';
+                }
+            });
+
+            // Logout Action
+            logoutBtn.addEventListener('click', () => {
+                sessionStorage.removeItem('ct_admin_auth');
+                dashboardSection.style.display = 'none';
+                loginSection.style.display = 'block';
+            });
+
+            // Render Dashboard View
+            async function showDashboard() {
+                loginSection.style.display = 'none';
+                dashboardSection.style.display = 'block';
+                
+                try {
+                    // Fetch from db.js (Supabase or LocalStorage)
+                    allRegistrations = await dbFetchRegistrations();
+                    renderTable(allRegistrations);
+                    calculateStats(allRegistrations);
+                } catch (err) {
+                    console.error("Error loading data:", err);
+                    alert("Error loading data from database. Check console logs.");
+                }
+            }
+
+            // Calculate stats
+            function calculateStats(data) {
+                statTotal.innerText = data.length;
+                
+                let worshipCount = 0;
+                let mediaCount = 0;
+                let othersCount = 0;
+
+                data.forEach(item => {
+                    const interest = item.interest || "";
+                    if (interest.includes("Worship")) {
+                        worshipCount++;
+                    } else if (interest.includes("Media")) {
+                        mediaCount++;
+                    } else {
+                        othersCount++;
+                    }
+                });
+
+                statWorship.innerText = worshipCount;
+                statMedia.innerText = mediaCount;
+                statOthers.innerText = othersCount;
+            }
+
+            // Render table rows
+            function renderTable(data) {
+                tableBody.innerHTML = '';
+                
+                if (data.length === 0) {
+                    emptyState.style.display = 'block';
+                    return;
+                }
+                
+                emptyState.style.display = 'none';
+                
+                data.forEach(item => {
+                    const row = document.createElement('tr');
+                    
+                    // Format date
+                    const dateObj = new Date(item.created_at);
+                    const formattedDate = dateObj.toLocaleDateString() + ' ' + dateObj.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+                    
+                    row.innerHTML = `
+                        <td>${formattedDate}</td>
+                        <td style="font-weight: 600;">${escapeHTML(item.name)}</td>
+                        <td><a href="tel:${item.phone}" style="color: var(--color-gold);">${escapeHTML(item.phone)}</a></td>
+                        <td><span class="ministry-tag" style="margin:0;">${escapeHTML(item.interest)}</span></td>
+                        <td>${escapeHTML(item.address)}</td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+            }
+
+            // Live Search Filter
+            searchInput.addEventListener('input', (e) => {
+                const query = e.target.value.toLowerCase().trim();
+                const filtered = allRegistrations.filter(item => {
+                    return (item.name || "").toLowerCase().includes(query) || 
+                           (item.interest || "").toLowerCase().includes(query) ||
+                           (item.address || "").toLowerCase().includes(query) ||
+                           (item.phone || "").includes(query);
+                });
+                renderTable(filtered);
+            });
+
+            // Export to CSV
+            exportBtn.addEventListener('click', () => {
+                if (allRegistrations.length === 0) {
+                    alert("No data available to export.");
+                    return;
+                }
+
+                // CSV headers
+                let csvContent = "data:text/csv;charset=utf-8,";
+                csvContent += "Date,Full Name,Phone Number,Area of Interest,Address\n";
+
+                // Add rows
+                allRegistrations.forEach(item => {
+                    const date = new Date(item.created_at).toLocaleString();
+                    // Escape double quotes inside values
+                    const name = `"${(item.name || "").replace(/"/g, '""')}"`;
+                    const phone = `"${(item.phone || "").replace(/"/g, '""')}"`;
+                    const interest = `"${(item.interest || "").replace(/"/g, '""')}"`;
+                    const address = `"${(item.address || "").replace(/"/g, '""')}"`;
+                    
+                    csvContent += `${date},${name},${phone},${interest},${address}\n`;
+                });
+
+                // Download Link
+                const encodedUri = encodeURI(csvContent);
+                const downloadLink = document.createElement("a");
+                downloadLink.setAttribute("href", encodedUri);
+                downloadLink.setAttribute("download", `Chosen_Tribe_Registrations_${new Date().toISOString().slice(0,10)}.csv`);
+                document.body.appendChild(downloadLink);
+                downloadLink.click();
+                document.body.removeChild(downloadLink);
+            });
+
+            // Utility to escape HTML and prevent XSS
+            function escapeHTML(str) {
+                if (!str) return "";
+                return str.replace(/[&<>'"]/g, 
+                    tag => ({
+                        '&': '&amp;',
+                        '<': '&lt;',
+                        '>': '&gt;',
+                        "'": '&#39;',
+                        '"': '&quot;'
+                    }[tag] || tag)
+                );
+            }
+        });
+    </script>
+</body>
+</html>

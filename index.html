@@ -26,7 +26,8 @@
                 <a href="#leadership">Leadership</a>
                 <a href="#ministries">Ministries</a>
                 <a href="#media">Media</a>
-                <a href="#contact" class="btn-primary-outline">Contact Us</a>
+                <a href="#register" class="btn-primary-outline">Register</a>
+                <a href="#contact">Contact Us</a>
             </div>
             <div class="mobile-menu-btn">
                 <i class="ph ph-list"></i>
@@ -42,6 +43,7 @@
             <a href="#leadership">Leadership</a>
             <a href="#ministries">Ministries</a>
             <a href="#media">Media</a>
+            <a href="#register">Register</a>
             <a href="#contact">Contact Us</a>
         </div>
     </div>
@@ -186,6 +188,53 @@
         </div>
     </section>
 
+    <!-- Member Registration Section -->
+    <section id="register" class="register-section section-padding">
+        <div class="container">
+            <div class="section-header text-center fade-in-up">
+                <h2 class="section-title">Join The <span class="text-gold">Tribe</span></h2>
+                <p>Register to connect, grow, and serve with us.</p>
+            </div>
+            
+            <div class="register-container glass-panel fade-in-up">
+                <form id="registration-form" class="register-form">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="reg-name">Full Name</label>
+                            <input type="text" id="reg-name" placeholder="Enter your full name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="reg-phone">Phone Number</label>
+                            <input type="tel" id="reg-phone" placeholder="Enter your phone number" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="reg-interest">Area of Interest</label>
+                            <select id="reg-interest" required>
+                                <option value="" disabled selected>Select your area of interest</option>
+                                <option value="Worship Station (Core Ministry)">Worship Station (Core Ministry)</option>
+                                <option value="Grace Media & Ministry Andaman">Grace Media & Ministry Andaman</option>
+                                <option value="Youth Fellowship">Youth Fellowship</option>
+                                <option value="Prayer & Intercession">Prayer & Intercession</option>
+                                <option value="Community Outreach">Community Outreach</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="reg-address">Address</label>
+                        <textarea id="reg-address" rows="3" placeholder="Enter your complete address" required></textarea>
+                    </div>
+                    <button type="submit" class="btn-primary glow-effect w-100">Submit Registration</button>
+                </form>
+                <div id="registration-success" class="success-message text-center" style="display: none;">
+                    <i class="ph ph-check-circle success-icon"></i>
+                    <h3>Registration Successful!</h3>
+                    <p>Welcome to the Tribe. The ministry team will get in touch with you shortly.</p>
+                    <button id="reg-reset-btn" class="btn-secondary" style="margin-top: 1.5rem;">Register Another Person</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Contact & Footer -->
     <section id="contact" class="contact-section section-padding">
         <div class="container">
@@ -251,6 +300,9 @@
         </div>
     </footer>
 
+    <!-- Supabase CDN and DB Helper -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/database.js"></script>
     <script src="js/main.js"></script>
 </body>
 </html>
