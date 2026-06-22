@@ -927,3 +927,53 @@ footer {
     }
 }
 
+/* Leader's Heart & Testimony Section */
+.testimony-section {
+    background: #03060a;
+}
+
+.testimony-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.testimony-card {
+    flex: 1 1 30%;
+    max-width: calc(33.333% - 1.34rem);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background: var(--glass-bg);
+}
+
+.testimony-card img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 10px;
+    display: block;
+}
+
+.testimony-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px var(--color-gold-glow);
+}
+
+@media (max-width: 992px) {
+    .testimony-card {
+        flex: 1 1 45%;
+        max-width: calc(50% - 1rem);
+    }
+}
+
+@media (max-width: 600px) {
+    .testimony-card {
+        flex: 1 1 100%;
+        max-width: 100%;
+    }
+}
+
+
